@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>DAMON AI - Nhận Diện Đồ Vật Ultra Scan (Mobile & Web)</title>
+
+  <!-- Fonts Google -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@500;600;700&display=swap"
+    rel="stylesheet">
+
+  <link rel="stylesheet" href="/static/style.css?v=2.7">
+</head>
+
+<body>
+
+  <!-- Header Ứng Dụng -->
+  <header class="app-header">
+    <div class="brand">
+      <div class="brand-icon">⚡</div>
+      <div>
+        <div class="brand-title">DAMON AI</div>
+        <div class="brand-subtitle">Ultra Scan 120Hz</div>
+      </div>
+    </div>
+
+    <div class="header-right-actions">
+      <!-- Bộ chọn ngôn ngữ học từ vựng -->
+      <div class="lang-selector-wrapper" title="Chọn ngôn ngữ bạn muốn học từ vựng">
+        <span class="lang-icon">🎓</span>
+        <select id="lang-selector" class="lang-select" aria-label="Ngôn ngữ học từ vựng">
+          <option value="vi">🇻🇳 Tiếng Việt</option>
+          <option value="zh">🇨🇳 Học Tiếng Trung</option>
+          <option value="ko">🇰🇷 Học Tiếng Hàn</option>
+          <option value="ru">🇷🇺 Học Tiếng Nga</option>
+          <option value="en">🇬🇧 Học Tiếng Anh</option>
+        </select>
+      </div>
+
+      <div class="header-badges">
+        <div class="badge" id="gpu-badge">
+          <span class="badge-dot"></span>
+          <span id="gpu-name-text">GPU ACTIVE</span>
+        </div>
+        <div class="badge" id="fps-badge">
+          <span id="fps-text">60 FPS</span>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Container Chính -->
+  <main class="main-container">
+
+    <!-- Khung Camera & Canvas Quét -->
+    <div class="camera-card">
+      <video id="webcam-video" autoplay playsinline muted></video>
+      <canvas id="output-canvas"></canvas>
+
+      <!-- Nút điều khiển nhanh trên camera -->
+      <div class="hud-bracket top-left"></div>
+      <div class="hud-bracket top-right"></div>
+      <div class="hud-bracket bottom-left"></div>
+      <div class="hud-bracket bottom-right"></div>
+      <div class="scan-laser-line"></div>
+
+      <div class="camera-overlay-controls">
+        <button class="icon-btn" id="btn-switch-camera" title="Đổi camera Trước / Sau">📷</button>
+        <button class="icon-btn" id="btn-toggle-light" title="Bật / Tắt xử lý ánh sáng (CLAHE)">💡</button>
+      </div>
+
+      <!-- Banner hiển thị vật thể chính -->
+      <div class="camera-status-banner">
+        <div class="detected-title">
+          <span>🔍</span>
+          <span id="primary-translation-text">Đang chuẩn bị camera...</span>
+        </div>
+        <div style="display: flex; gap: 6px; flex-wrap: wrap;">
+          <button class="tts-btn" id="btn-toggle-auto-speak"
+            style="background: rgba(139, 92, 246, 0.15); border-color: var(--accent); color: var(--accent);">
+            🎙️ Auto Đọc: TẮT
+          </button>
+          <button class="tts-btn" id="btn-speak">
+            🔊 Nghe đọc
+          </button>
+          <button class="tts-btn" id="btn-report-wrong"
+            style="background: rgba(239, 68, 68, 0.15); border-color: var(--danger); color: #fca5a5;">
+            ⚠️ Sửa nhãn
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Panel Điều Khiển -->
+    <div class="control-grid">
+
+      <!-- Card Cấu Hình Quét -->
+      <div class="panel-card">
+        <div class="panel-header">
+          <span>⚙️ Cấu Hình Độ Nhạy</span>
+          <span id="conf-val-display" style="color: var(--primary);">35%</span>
+        </div>
+
+        <div class="slider-group">
+          <div class="slider-label">
+            <span>Ngưỡng Tự Tin (Confidence)</span>
+            <span style="color: var(--text-muted); font-size: 0.75rem;">Mở rộng: 15% - 90%</span>
+          </div>
+          <input type="range" id="conf-slider" class="custom-slider" min="15" max="90" value="35" step="5">
+        </div>
+
+        <div class="toggle-group" style="grid-template-columns: repeat(4, 1fr); gap: 4px;">
+          <button class="action-btn active" id="btn-model-hybrid"
+            title="Kết hợp thông minh: Mô hình đã học + YOLO-World">
+            🚀 Lai (Hybrid)
+          </button>
+          <button class="action-btn" id="btn-model-finetuned" title="Chỉ dùng mô hình do bạn tự dạy">
+            🧠 Đã Học
+          </button>
+          <button class="action-btn" id="btn-model-small" title="Mô hình gốc nhanh (120Hz)">
+            ⚡ Small
+          </button>
+          <button class="action-btn" id="btn-model-large" title="Mô hình gốc chính xác cao">
+            🎯 Large
+          </button>
+        </div>
+      </div>
+
+      <!-- Card Huấn Luyện Thêm (Active Learning) -->
+      <div class="panel-card">
+        <div class="panel-header">
+          <span>🎓 Dạy Thêm AI (Fine-Tuning)</span>
+          <span id="feedback-count-badge" style="color: var(--secondary); font-size: 0.8rem; font-weight: 600;">0
+            mẫu</span>
+        </div>
+        <p style="color: var(--text-muted); font-size: 0.8rem; line-height: 1.4; margin-bottom: 12px;">
+          Khi AI nhận diện nhầm, bấm <b>Sửa nhãn</b> để lưu mẫu ảnh. Sau đó chạy lệnh huấn luyện để mô hình nhớ chính
+          xác!
+        </p>
+        <div style="display: flex; gap: 8px;">
+          <button class="action-btn" id="btn-open-feedback"
+            style="flex: 1; border-color: rgba(239, 68, 68, 0.4); color: #fca5a5;">
+            ✏️ Sửa nhãn
+          </button>
+          <button class="action-btn" id="btn-open-guide" style="flex: 1; border-color: var(--border-color);">
+            📖 Lệnh Train
+          </button>
+        </div>
+      </div>
+
+      <!-- Card Lịch Sử Đồ Vật -->
+      <div class="panel-card">
+        <div class="panel-header">
+          <span>📋 Đồ Vật Đã Quét (<span id="history-count">0</span>)</span>
+          <button id="btn-clear-history"
+            style="background: none; border: none; color: var(--danger); font-size: 0.8rem; font-weight: 600; cursor: pointer;">Xóa</button>
+        </div>
+
+        <div class="history-list" id="history-container">
+          <div style="color: var(--text-muted); font-size: 0.85rem;" id="empty-history-msg">Chưa có đồ vật nào trong
+            lịch sử quét...</div>
+        </div>
+      </div>
+
+    </div>
+
+  </main>
+
+  <!-- MODAL SỬA NHÃN & THU THẬP MẪU -->
+  <div class="modal-backdrop" id="modal-feedback-backdrop" style="display: none;">
+    <div class="modal-card">
+      <div class="modal-header">
+        <div style="display: flex; align-items: center; gap: 8px;">
+          <span style="font-size: 1.15rem;">⚠️</span>
+          <span style="font-weight: 700; font-size: 1rem;">Khoanh Vùng & Sửa Nhãn</span>
+        </div>
+        <div style="display: flex; align-items: center; gap: 8px;">
+          <span id="modal-predicted-label" class="predicted-chip" title="Mô hình vừa đoán">Chưa xác định</span>
+          <button class="modal-close-btn" id="btn-close-feedback-modal">✕</button>
+        </div>
+      </div>
+
+      <div class="modal-body">
+        <div class="modal-preview-box">
+          <canvas id="feedback-canvas"></canvas>
+          <img id="feedback-preview-img" alt="Frame preview" style="display: none;">
+          <div class="preview-overlay-tag">📐 Kéo thả</div>
+          <div class="box-quick-tools">
+            <button type="button" class="box-tool-btn" id="btn-reset-box" title="Đặt lại khung ban đầu">🔄 Khung
+              gốc</button>
+            <button type="button" class="box-tool-btn" id="btn-full-box" title="Khoanh toàn bộ ảnh">🔲 Toàn ảnh</button>
+          </div>
+        </div>
+
+        <div class="box-sub-hint">
+          <span>👆 <b>Mẹo:</b> Chạm & kéo trên ảnh để khoanh đúng vật thể. Kéo 4 góc tròn để co giãn khung.</span>
+        </div>
+
+        <!-- Khối hiển thị nhãn đã chọn -->
+        <div id="selected-class-pill" class="selected-class-banner" style="display: none;">
+          <div class="selected-class-text">
+            <span>✅ Đã chọn: <strong id="selected-class-name">...</strong></span>
+          </div>
+          <button type="button" id="btn-deselect-class" class="deselect-btn">Đổi lại</button>
+        </div>
+
+        <!-- Ô Tìm Kiếm & Gán Nhãn Thông Minh -->
+        <div class="modal-form-group">
+          <label style="display: flex; justify-content: space-between; align-items: center;">
+            <span>Gán nhãn đúng thực tế:</span>
+            <span style="font-size: 0.75rem; color: var(--primary); font-weight: normal;">Tìm kiếm tức thì</span>
+          </label>
+          <div class="search-input-box">
+            <span class="search-icon">🔍</span>
+            <input type="text" id="feedback-search-input" class="search-input"
+              placeholder="Gõ tên (vd: bút, kính, thẻ, điện thoại...)" autocomplete="off">
+            <button type="button" id="btn-clear-class-search" class="clear-search-btn" style="display: none;">✕</button>
+          </div>
+        </div>
+
+        <!-- Gợi ý chọn nhanh (Quick Chips) -->
+        <div class="quick-chips-section" id="quick-chips-container">
+          <span class="quick-chips-title">⚡ Chọn nhanh:</span>
+          <div class="quick-chips-list" id="quick-chips-list"></div>
+        </div>
+
+        <!-- Lưới kết quả tìm kiếm cuộn mượt -->
+        <div class="class-results-wrapper">
+          <div class="class-results-grid" id="class-results-grid"></div>
+        </div>
+
+        <!-- Hidden input lưu trữ key đã chọn -->
+        <input type="hidden" id="feedback-selected-key" value="">
+        <input type="hidden" id="feedback-selected-vi" value="">
+
+        <!-- Nhập tùy chỉnh nếu là đồ vật mới toanh -->
+        <div class="modal-form-group" id="custom-class-group" style="display: none;">
+          <label for="feedback-custom-input">➕ Tên đồ vật mới:</label>
+          <div style="display: flex; gap: 8px;">
+            <input type="text" id="feedback-custom-input" class="modal-input" placeholder="Ví dụ: Căn cước công dân">
+            <button type="button" id="btn-apply-custom-class" class="action-btn"
+              style="white-space: nowrap; background: var(--secondary);">Xác nhận</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="modal-footer">
+        <button class="action-btn" id="btn-cancel-feedback">Hủy</button>
+        <button class="action-btn active" id="btn-save-feedback" style="background: var(--primary);">
+          💾 Lưu Mẫu Huấn Luyện
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL HƯỚNG DẪN TRAIN -->
+  <div class="modal-backdrop" id="modal-guide-backdrop" style="display: none;">
+    <div class="modal-card">
+      <div class="modal-header">
+        <div style="display: flex; align-items: center; gap: 8px;">
+          <span style="font-size: 1.2rem;">📖</span>
+          <span style="font-weight: 700;">Hướng Dẫn Huấn Luyện Lại (Fine-Tuning)</span>
+        </div>
+        <button class="modal-close-btn" id="btn-close-guide-modal">✕</button>
+      </div>
+
+      <div class="modal-body">
+        <ol class="guide-steps">
+          <li>
+            <b>Thu thập mẫu:</b> Khi quét camera, gặp đồ vật bị đoán sai, bấm <b>"⚠️ Sửa nhãn"</b> (nên chụp từ 5 - 15
+            ảnh các góc khác nhau).
+          </li>
+          <li>
+            <b>Mở Terminal trên máy tính</b> (nơi đang chạy dự án DAMON AI).
+          </li>
+          <li>
+            <b>Chạy lệnh huấn luyện tự động:</b>
+            <div class="code-box">
+              <code>python train_finetune.py --epochs 25</code>
+              <button class="copy-btn" id="btn-copy-train-cmd" title="Sao chép">📋 Copy</button>
+            </div>
+          </li>
+          <li>
+            <b>Kết quả:</b> Script sẽ tự động đóng băng các tầng cũ (giữ trí nhớ), chỉ dạy lại các đồ vật bị sai và sinh
+            ra file trọng số mới tại:
+            <div class="code-box" style="margin-top: 6px;">
+              <code>weights/best_finetuned.pt</code>
+            </div>
+          </li>
+        </ol>
+      </div>
+
+      <div class="modal-footer">
+        <button class="action-btn active" id="btn-close-guide-action" style="flex: 1;">Đã hiểu</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- TOAST THÔNG BÁO -->
+  <div id="toast-notification" class="toast-popup" style="display: none;"></div>
+
+  <script src="/static/app.js?v=2.7"></script>
+</body>
+
+</html>

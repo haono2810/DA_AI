@@ -1,5 +1,38 @@
-.venv/
+# Byte-compiled / optimized / DLL files
 __pycache__/
-*.pyc
+*.py[cod]
+*$py.class
+*.cache
+
+# Virtual Environments
+.venv/
+*/.venv/
+**/.venv/
+env/
+venv/
+ENV/
+
+# Model Weights & Checkpoints (>100MB and binary files)
 *.pt
-runs/
+*.pth
+*.onnx
+*.bin
+weights/clip/ViT-B-32.pt
+yolov8*.pt
+
+# Sensitive / Local configs
+.env
+.env.local
+.env.*.local
+
+# Logs and databases
+*.log
+*.sqlite3
+
+# IDE & OS
+.vscode/
+.idea/
+*.swp
+Thumbs.db
+.DS_Store
+

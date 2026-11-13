@@ -1,0 +1,257 @@
+[
+  {
+    "id": "1791864358_c8f06b",
+    "timestamp": "2026-10-13 11:05:58",
+    "image": "1791864358_c8f06b.jpg",
+    "predicted": "Cái ghế (CHAIR)",
+    "correct_key": "glasses",
+    "correct_vi": "Kính mắt",
+    "class_id": 9,
+    "bbox": [
+      0.5822916666666667,
+      0.378125,
+      0.6312500000000001,
+      0.478125
+    ]
+  },
+  {
+    "id": "1791864390_e53a6b",
+    "timestamp": "2026-10-13 11:06:30",
+    "image": "1791864390_e53a6b.jpg",
+    "predicted": "Cái kéo (SCISSORS) - 75%",
+    "correct_key": "glasses",
+    "correct_vi": "Kính mắt",
+    "class_id": 9,
+    "bbox": [
+      0.5,
+      0.5,
+      0.85,
+      0.85
+    ]
+  },
+  {
+    "id": "1793062733_447641",
+    "timestamp": "2026-10-27 07:58:53",
+    "image": "1793062733_447641.jpg",
+    "predicted": "Cái kéo (SCISSORS)",
+    "correct_key": "pen",
+    "correct_vi": "Cây bút",
+    "class_id": 8,
+    "bbox": [
+      0.490625,
+      0.3625,
+      0.8979166666666667,
+      0.24062499999999998
+    ]
+  },
+  {
+    "id": "1793062769_5e59c8",
+    "timestamp": "2026-10-27 07:59:29",
+    "image": "1793062769_5e59c8.jpg",
+    "predicted": "Cái kéo (SCISSORS)",
+    "correct_key": "pen",
+    "correct_vi": "Cây bút",
+    "class_id": 8,
+    "bbox": [
+      0.51875,
+      0.4734375,
+      0.8958333333333334,
+      0.25625
+    ]
+  },
+  {
+    "id": "1793062858_4a2fa9",
+    "timestamp": "2026-10-27 08:00:58",
+    "image": "1793062858_4a2fa9.jpg",
+    "predicted": "Cái kéo (SCISSORS)",
+    "correct_key": "pen",
+    "correct_vi": "Cây bút",
+    "class_id": 8,
+    "bbox": [
+      0.4927083333333333,
+      0.5125000000000001,
+      0.39791666666666664,
+      0.5281250000000001
+    ]
+  },
+  {
+    "id": "1793063960_354b7c",
+    "timestamp": "2026-10-27 08:19:20",
+    "image": "1793063960_354b7c.jpg",
+    "predicted": "Cái kéo (SCISSORS)",
+    "correct_key": "pen",
+    "correct_vi": "Cây bút",
+    "class_id": 8,
+    "bbox": [
+      0.5197916666666667,
+      0.3703125,
+      0.47291666666666665,
+      0.496875
+    ]
+  },
+  {
+    "id": "1793063985_c4871d",
+    "timestamp": "2026-10-27 08:19:45",
+    "image": "1793063985_c4871d.jpg",
+    "predicted": "Cái kéo (SCISSORS)",
+    "correct_key": "pen",
+    "correct_vi": "Cây bút",
+    "class_id": 8,
+    "bbox": [
+      0.453125,
+      0.4375,
+      0.7479166666666666,
+      0.43124999999999997
+    ]
+  },
+  {
+    "id": "1793064001_6125ec",
+    "timestamp": "2026-10-27 08:20:01",
+    "image": "1793064001_6125ec.jpg",
+    "predicted": "Cái kéo (SCISSORS)",
+    "correct_key": "pen",
+    "correct_vi": "Cây bút",
+    "class_id": 8,
+    "bbox": [
+      0.4947916666666667,
+      0.39531249999999996,
+      0.8770833333333333,
+      0.4875
+    ]
+  },
+  {
+    "id": "1793064011_8f3762",
+    "timestamp": "2026-10-27 08:20:11",
+    "image": "1793064011_8f3762.jpg",
+    "predicted": "Cái kéo (SCISSORS)",
+    "correct_key": "pen",
+    "correct_vi": "Cây bút",
+    "class_id": 8,
+    "bbox": [
+      0.48854166666666665,
+      0.33125,
+      0.7770833333333333,
+      0.415625
+    ]
+  },
+  {
+    "id": "1793064021_13c45a",
+    "timestamp": "2026-10-27 08:20:21",
+    "image": "1793064021_13c45a.jpg",
+    "predicted": "Cái kéo (SCISSORS)",
+    "correct_key": "pen",
+    "correct_vi": "Cây bút",
+    "class_id": 8,
+    "bbox": [
+      0.5291666666666667,
+      0.45,
+      0.9083333333333333,
+      0.4625
+    ]
+  },
+  {
+    "id": "1793064055_d15cf2",
+    "timestamp": "2026-10-27 08:20:55",
+    "image": "1793064055_d15cf2.jpg",
+    "predicted": "Cái kéo (SCISSORS) - 76%",
+    "correct_key": "pen",
+    "correct_vi": "Cây bút",
+    "class_id": 8,
+    "bbox": [
+      0.5,
+      0.5,
+      0.85,
+      0.85
+    ]
+  },
+  {
+    "id": "1793064085_7a3124",
+    "timestamp": "2026-10-27 08:21:25",
+    "image": "1793064085_7a3124.jpg",
+    "predicted": "Cái kéo (SCISSORS) - 38%",
+    "correct_key": "pen",
+    "correct_vi": "Cây bút",
+    "class_id": 8,
+    "bbox": [
+      0.5,
+      0.5,
+      0.85,
+      0.85
+    ]
+  },
+  {
+    "id": "1793064101_82967b",
+    "timestamp": "2026-10-27 08:21:41",
+    "image": "1793064101_82967b.jpg",
+    "predicted": "Cái kéo (SCISSORS) - 40%",
+    "correct_key": "pen",
+    "correct_vi": "Cây bút",
+    "class_id": 8,
+    "bbox": [
+      0.5,
+      0.5,
+      0.85,
+      0.85
+    ]
+  },
+  {
+    "id": "1793064721_1b53d1",
+    "timestamp": "2026-10-27 08:32:01",
+    "image": "1793064721_1b53d1.jpg",
+    "predicted": "Kính mắt (GLASSES)",
+    "correct_key": "keyboard",
+    "correct_vi": "Bàn phím",
+    "class_id": 3,
+    "bbox": [
+      0.6510416666666667,
+      0.2828125,
+      0.6854166666666667,
+      0.5625
+    ]
+  },
+  {
+    "id": "1793064728_7fc38f",
+    "timestamp": "2026-10-27 08:32:08",
+    "image": "1793064728_7fc38f.jpg",
+    "predicted": "Kính mắt (GLASSES)",
+    "correct_key": "keyboard",
+    "correct_vi": "Bàn phím",
+    "class_id": 3,
+    "bbox": [
+      0.5375,
+      0.309375,
+      0.9208333333333334,
+      0.5812499999999999
+    ]
+  },
+  {
+    "id": "1793064745_9b7678",
+    "timestamp": "2026-10-27 08:32:25",
+    "image": "1793064745_9b7678.jpg",
+    "predicted": "Kính mắt (GLASSES)",
+    "correct_key": "keyboard",
+    "correct_vi": "Bàn phím",
+    "class_id": 3,
+    "bbox": [
+      0.4010416666666667,
+      0.19765625,
+      0.7979166666666667,
+      0.3953125
+    ]
+  },
+  {
+    "id": "1793067813_df1d3a",
+    "timestamp": "2026-10-27 09:23:33",
+    "image": "1793067813_df1d3a.jpg",
+    "predicted": "Cái kéo (SCISSORS) - 74%",
+    "correct_key": "pen",
+    "correct_vi": "Cây bút",
+    "class_id": 8,
+    "bbox": [
+      0.5072916666666667,
+      0.4609375,
+      0.93125,
+      0.25937499999999997
+    ]
+  }
+]

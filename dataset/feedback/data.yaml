@@ -1,0 +1,38 @@
+path: E:/KIEN_TRUC/NAM_4/KI_1/DO_AN_AI/DAMONAI/dataset/feedback
+train: images
+val: images
+
+names:
+  0: smartphone
+  1: laptop
+  2: mouse
+  3: keyboard
+  4: headset
+  5: bottle
+  6: cup
+  7: book
+  8: pen
+  9: glasses
+  10: watch
+  11: clock
+  12: remote
+  13: wallet
+  14: key
+  15: charger
+  16: chair
+  17: backpack
+  18: scissors
+  19: calculator
+  20: speaker
+  21: umbrella
+  22: car
+  23: motorcycle
+  24: bicycle
+  25: apple
+  26: banana
+  27: spoon
+  28: money
+  29: helmet
+  30: toilet_paper
+  31: card
+  32: power_outlet
